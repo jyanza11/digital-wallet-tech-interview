@@ -1,0 +1,25 @@
+<h2>Confirmacion de Pago</h2>
+
+<p>Estimado/a <strong>{{name}}</strong>,</p>
+
+<p>Hemos recibido una solicitud para realizar un pago desde su billetera digital. Para completar esta transaccion, utilice el siguiente codigo de confirmacion:</p>
+
+<div class="code-box">
+  <span class="code-value">{{otp}}</span>
+</div>
+
+<div class="amount-box">
+  <div class="amount-label">Monto de la transaccion</div>
+  <div class="amount-value">${{amount}}</div>
+</div>
+
+<div class="warning-box">
+  <p><strong>Importante:</strong></p>
+  <p>- Este codigo expira en {{expirationMinutes}} minutos.</p>
+  <p>- No comparta este codigo con terceros.</p>
+  <p>- Si usted no solicito este pago, ignore este mensaje y su saldo permanecera intacto.</p>
+</div>
+
+<p>Si tiene alguna pregunta o necesita asistencia, no dude en contactar a nuestro equipo de soporte.</p>
+
+<p>Atentamente,<br><strong>Equipo Digital Wallet</strong></p>

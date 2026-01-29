@@ -1,13 +1,7 @@
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsPositive,
-  IsString,
-  Min,
-} from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class RechargeWalletDto {
+export class CheckBalanceDto {
   @ApiProperty({ example: '9999999999', description: 'Documento del cliente' })
   @IsNotEmpty({ message: 'El documento es obligatorio' })
   @IsString({ message: 'El documento debe ser una cadena de texto' })
@@ -17,11 +11,4 @@ export class RechargeWalletDto {
   @IsNotEmpty({ message: 'El celular es obligatorio' })
   @IsString({ message: 'El celular debe ser una cadena de texto' })
   phone: string;
-
-  @ApiProperty({ example: 10000, description: 'Monto a recargar (COP)' })
-  @IsNotEmpty({ message: 'El valor es obligatorio' })
-  @IsNumber({}, { message: 'El valor debe ser un número' })
-  @IsPositive({ message: 'El valor debe ser positivo' })
-  @Min(1000, { message: 'El valor mínimo de recarga es $1,000' })
-  amount: number;
 }

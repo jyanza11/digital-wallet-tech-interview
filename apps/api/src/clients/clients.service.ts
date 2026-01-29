@@ -4,12 +4,16 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { EmailService } from '../email/email.service';
 import { CreateClientDto } from './dto';
 import type { Client, Wallet } from '@repo/database';
 
 @Injectable()
 export class ClientsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly emailService: EmailService,
+  ) {}
 
   async create(
     createClientDto: CreateClientDto,
@@ -26,9 +30,7 @@ export class ClientsService {
 
     if (existingClient) {
       if (existingClient.document === createClientDto.document) {
-        throw new ConflictException(
-          'Ya existe un cliente con este documento',
-        );
+        throw new ConflictException('Ya existe un cliente con este documento');
       }
       throw new ConflictException('Ya existe un cliente con este email');
     }
@@ -49,6 +51,13 @@ export class ClientsService {
       include: {
         wallet: true,
       },
+    });
+
+    // Send welcome email (async, don't wait)
+    this.emailService.sendWelcomeEmail(client.email, {
+      name: client.name,
+      document: client.document,
+      email: client.email,
     });
 
     return client as Client & { wallet: Wallet };

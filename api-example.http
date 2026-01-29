@@ -1,0 +1,59 @@
+### =========================
+### CLIENT FLOW
+### =========================
+
+### Register a new client
+POST http://localhost:3001/api/clients/register
+Content-Type: application/json
+
+{
+  "document": "9999999999",
+  "name": "Juan Jose Yanza Herrera",
+  "email": "jjyanza1@gmail.com",
+  "phone": "0987654321"
+}
+
+### Recharge wallet
+POST http://localhost:3001/api/wallet/recharge
+Content-Type: application/json
+
+{
+  "document": "9999999999",
+  "phone": "0987654321",
+  "amount": 1500
+}
+
+### Check balance
+POST http://localhost:3001/api/wallet/balance
+Content-Type: application/json
+
+{
+  "document": "9999999999",
+  "phone": "0987654321"
+}
+
+### =========================
+### PAYMENT FLOW (OTP)
+### =========================
+
+### Request payment (generates OTP and sends to email)
+POST http://localhost:3001/api/payments/request
+Content-Type: application/json
+
+{
+  "document": "9999999999",
+  "phone": "0987654321",
+  "amount": 50
+}
+
+### Confirm payment with OTP (replace sessionId and token)
+POST http://localhost:3001/api/payments/confirm
+Content-Type: application/json
+
+{
+  "sessionId": "REPLACE_WITH_SESSION_ID",
+  "token": "123456"
+}
+
+### Get payment session status (replace id)
+GET http://localhost:3001/api/payments/session/REPLACE_WITH_SESSION_ID
