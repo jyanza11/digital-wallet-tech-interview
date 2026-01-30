@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Billetera Digital – Frontend (Next.js)
 
-## Getting Started
+## Stack
 
-First, run the development server:
+- **Next.js 16** (App Router)
+- **Tailwind CSS v4** + **shadcn/ui**
+- **Fuente:** Poppins (Google Fonts)
+- **Toasts:** Sonner
+- **Formularios:** React Hook Form + Zod + @hookform/resolvers
+
+## Instalación
+
+Desde la raíz del monorepo:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuración Tailwind v4 + shadcn
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Tailwind v4** ya está configurado en `package.json` (`tailwindcss@^4`, `@tailwindcss/postcss`) y en `postcss.config.mjs`. Los estilos del tema shadcn están en `app/globals.css` con `@import "tailwindcss"` y `@theme inline`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+2. **Añadir componentes shadcn** (opcional; ya hay botón e input custom en `components/ui`):
 
-## Learn More
+   ```bash
+   cd apps/web
+   pnpm dlx shadcn@latest add button input card label sonner
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+   Si el CLI pregunta por Tailwind v4, confirmar que se usa v4. Si pregunta por el directorio de componentes, usar `@/components`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Fuente Poppins
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+La fuente **Poppins** se carga en `app/layout.tsx` con `next/font/google` y se aplica al body mediante la variable `--font-poppins` y la utilidad `font-sans` de Tailwind (definida en `@theme inline` en `globals.css`).
 
-## Deploy on Vercel
+## Variables de entorno
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Copiar `apps/web/.env.example` a `apps/web/.env.local` y ajustar:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `NEXT_PUBLIC_API_URL`: URL base de la API (por defecto `http://localhost:3001/api`).
+
+## Desarrollo
+
+```bash
+pnpm dev
+# o solo la web:
+pnpm --filter web dev
+```
+
+La app se sirve en **http://localhost:3000**.

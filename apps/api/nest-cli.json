@@ -8,6 +8,10 @@
       {
         "include": "email/templates/**/*.hbs",
         "watchAssets": true
+      },
+      {
+        "include": "email/templates/*.hbs",
+        "watchAssets": true
       }
     ]
   }

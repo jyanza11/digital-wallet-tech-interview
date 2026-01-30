@@ -56,6 +56,16 @@ model PaymentSession {
   @@map("payment_sessions")
 }
 
+model LoginOtp {
+  id        String   @id @default(uuid())
+  email     String
+  otp       String
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("login_otps")
+}
+
 enum TransactionType {
   RECHARGE
   PAYMENT
